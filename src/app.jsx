@@ -546,7 +546,7 @@ const PflegeDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-base sm:text-lg md:text-2xl font-bold">Dashboard Pflege-Übergabe</h1>
-                <p className="text-blue-100 text-xs mt-0.5">Station E.2 - Allgemeinchirurgie - Unimedizin Greifswald • {uebergabe.von} → {uebergabe.nach}</p>
+                <p className="text-blue-100 text-xs mt-0.5">Station Allgemeinchirurgie • {uebergabe.von} → {uebergabe.nach}</p>
               </div>
               <div className="text-right">
                 <div className="text-xs text-blue-100">Übergabe</div>
