@@ -533,7 +533,7 @@ const PflegeDashboard = () => {
         <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
           <div className="text-center mb-6">
             <h1 className="text-3xl font-bold text-gray-800 mb-2">Pflege-Dashboard</h1>
-            <p className="text-gray-600">Station E.2 - Login</p>
+            <p className="text-gray-600">Station DashboardCrew - Login</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
