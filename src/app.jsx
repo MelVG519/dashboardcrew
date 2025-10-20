@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
 import { Search, Clock, AlertCircle, CheckCircle, User, Pill, Calendar, FileText, Bell, Printer, Download } from 'lucide-react';
 
-const PflegeDashboard = () => {
+const PflegeDashboard = () => {  
+  const PASSWORD = import.meta.env.VITE_APP_PASSWORD;
+  const loginEnabled = Boolean(PASSWORD);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(!loginEnabled);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (passwordInput === PASSWORD) {
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('Falsches Passwort!');
+    }
+  };
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [filterPriority, setFilterPriority] = useState('alle');
   const [searchTerm, setSearchTerm] = useState('');
@@ -511,7 +527,44 @@ const PflegeDashboard = () => {
     link.click();
     document.body.removeChild(link);
   };
-
+  if (loginEnabled && !isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
+        <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">Pflege-Dashboard</h1>
+            <p className="text-gray-600">Station E.2 - Login</p>
+          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Passwort
+              </label>
+              <input
+                type="password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Passwort eingeben..."
+                autoFocus
+              />
+            </div>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors"
+            >
+              Anmelden
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-gray-50">
       <style>{`
